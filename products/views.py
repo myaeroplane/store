@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from datetime import datetime
+from products.models import Product, ProductCategory
 
 current_date = datetime.now()
 
@@ -16,7 +17,9 @@ def index(request):
 
 def products(request):
     context = {
-                  'tittle': 'Catalog',
+        'tittle': 'Catalog',
+        'categories': ProductCategory.objects.all(),
+        'products': Product.objects.all(),
               }
     return render(request, 'products/products.html', context)
 
@@ -48,3 +51,4 @@ def test_context(request):
         ],
     }
     return render(request, 'products/test_context.html', context)
+
